@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Curator-zk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Oauth2-Demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Spring-boot-Redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Spring-boot-Redis/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
