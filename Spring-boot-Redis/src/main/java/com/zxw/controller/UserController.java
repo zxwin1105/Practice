@@ -1,8 +1,6 @@
 package com.zxw.controller;
 
 import com.zxw.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +17,7 @@ import java.util.StringJoiner;
 public class UserController {
 
     @Resource
-    private RedisTemplate<String, User> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
 
     @PostMapping("/add")
@@ -31,7 +29,7 @@ public class UserController {
 
     @DeleteMapping("/remove/{id}")
     public User remove(@PathVariable Integer id){
-        return  redisTemplate.opsForValue().getAndDelete(genKey(id));
+        return  (User) redisTemplate.opsForValue().getAndDelete(genKey(id));
     }
 
     private String genKey(Integer id){

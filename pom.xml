@@ -12,6 +12,13 @@
         <module>Curator-zk</module>
         <module>Oauth2-Demo</module>
         <module>Spring-boot-Redis</module>
+        <module>PgDB-Demo</module>
+        <module>Pay-Demo</module>
+        <module>Activemq-Demo</module>
+        <module>UnitTest</module>
+        <module>JDK-Feature</module>
+        <module>Security-Demo</module>
+        <module>Mybatis-plus-Demo</module>
     </modules>
 
     <parent>
@@ -23,5 +30,30 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
