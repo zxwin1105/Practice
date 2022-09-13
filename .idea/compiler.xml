@@ -8,6 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JDK-Feature" />
+        <module name="xxlJob-Demo" />
+        <module name="Redis-Demo" />
         <module name="Spring-boot-Redis" />
         <module name="PgDB-Demo" />
         <module name="Pay-Demo" />
@@ -25,12 +27,16 @@
       <module name="Activemq-Demo" options="-parameters" />
       <module name="AuthServer" options="-parameters" />
       <module name="Curator-zk" options="-parameters" />
+      <module name="JDK-Feature" options="-parameters" />
       <module name="Mybatis-plus-Demo" options="-parameters" />
       <module name="Oauth2-Demo" options="-parameters" />
       <module name="Pay-Demo" options="-parameters" />
       <module name="PgDB-Demo" options="-parameters" />
+      <module name="Redis-Demo" options="-parameters" />
+      <module name="Security-Demo" options="-parameters" />
       <module name="Spring-boot-Redis" options="-parameters" />
       <module name="UnitTest" options="-parameters" />
+      <module name="xxlJob-Demo" options="-parameters" />
     </option>
   </component>
 </project>

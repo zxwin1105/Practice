@@ -19,6 +19,8 @@
         <module>JDK-Feature</module>
         <module>Security-Demo</module>
         <module>Mybatis-plus-Demo</module>
+        <module>xxlJob-Demo</module>
+        <module>Redis-Demo</module>
     </modules>
 
     <parent>
@@ -29,6 +31,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <jackson.version></jackson.version>
     </properties>
 
     <repositories>

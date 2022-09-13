@@ -3,7 +3,6 @@ package com.mp.controller;
 import com.mp.entity.User;
 import com.mp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 /**
  * @author zhaixinwei
  * @date 2022/8/3
- * @description
  */
 @RestController
 @RequestMapping("/user")

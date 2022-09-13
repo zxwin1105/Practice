@@ -1,0 +1,13 @@
+server:
+  port: 9021
+spring:
+  redis:
+    cluster:
+      nodes: 192.168.56.11:16390,192.168.56.11:16391,192.168.56.11:16392,192.168.56.11:16393,192.168.56.11:16394,192.168.56.11:16395
+    lettuce:
+      pool:
+        max-active: 100
+        max-idle: 50
+        min-idle: 10
+    password: zxwin
+    timeout: 3000
