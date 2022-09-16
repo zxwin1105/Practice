@@ -1,0 +1,9 @@
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "e": "AQAB",
+      "n": "xxxxx"
+    }
+  ]
+}

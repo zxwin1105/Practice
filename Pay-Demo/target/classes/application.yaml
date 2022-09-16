@@ -1,0 +1,7 @@
+server:
+  port: 8080
+wxpay:
+  appId: wx8397f8696b538317
+  mchId: 1473426802
+  key: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+  notify_url: https://4183-113-201-62-2.jp.ngrok.io/pay/notify_url/callback
