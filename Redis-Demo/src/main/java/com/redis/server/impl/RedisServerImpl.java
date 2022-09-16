@@ -93,11 +93,11 @@ public class RedisServerImpl implements RedisServer {
                 "if isExists == 0 then " +
                 "return 0 " +
                 "end " +
-                "local num = tonumber(redis.call('get',KEYS[1])) " +
-                "if (tonumber(ARGV[1]) > num) then " +
-                "return 0 " +
+                "local num = tonumber(redis.call('get',KEYS[1]))" +
+                "local res = 0 " +
+                "if (num - tonumber(ARGV[1])) >= 0 then " +
+                "redis.call('decrBy',KEYS[1],tonumber(ARGV[1]))" +
                 "end " +
-                "local res = redis.call('decrBy',KEYS[1],ARGV[1]) " +
                 "return res ";
         int res = redisUtil.script(new RedisScript<Integer>() {
             @Override

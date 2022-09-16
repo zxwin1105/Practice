@@ -9,33 +9,43 @@
         <outputRelativeToContentRoot value="true" />
         <module name="JDK-Feature" />
         <module name="xxlJob-Demo" />
-        <module name="Redis-Demo" />
+        <module name="Producer-Demo" />
         <module name="Spring-boot-Redis" />
         <module name="PgDB-Demo" />
         <module name="Pay-Demo" />
         <module name="AuthServer" />
         <module name="Activemq-Demo" />
-        <module name="Curator-zk" />
+        <module name="Consumer-Demo" />
+        <module name="Mybatis-plus-Demo" />
+        <module name="Redis-Demo" />
         <module name="UnitTest" />
         <module name="Security-Demo" />
-        <module name="Mybatis-plus-Demo" />
+        <module name="Zookeeper-Demo" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Curator-zk" target="8" />
+      <module name="Producter-Demo" target="8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Activemq-Demo" options="-parameters" />
       <module name="AuthServer" options="-parameters" />
+      <module name="Consumer-Demo" options="-parameters" />
       <module name="Curator-zk" options="-parameters" />
       <module name="JDK-Feature" options="-parameters" />
       <module name="Mybatis-plus-Demo" options="-parameters" />
       <module name="Oauth2-Demo" options="-parameters" />
       <module name="Pay-Demo" options="-parameters" />
       <module name="PgDB-Demo" options="-parameters" />
+      <module name="Producer-Demo" options="-parameters" />
+      <module name="Rabbitmq-Demo" options="" />
       <module name="Redis-Demo" options="-parameters" />
       <module name="Security-Demo" options="-parameters" />
       <module name="Spring-boot-Redis" options="-parameters" />
       <module name="UnitTest" options="-parameters" />
+      <module name="Zookeeper-Demo" options="-parameters" />
       <module name="xxlJob-Demo" options="-parameters" />
     </option>
   </component>
