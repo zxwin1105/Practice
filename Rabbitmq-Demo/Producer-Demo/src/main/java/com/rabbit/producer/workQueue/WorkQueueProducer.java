@@ -17,17 +17,18 @@ import java.util.concurrent.TimeoutException;
  */
 @Slf4j
 public class WorkQueueProducer {
+    public static final String COLOR_EXCHANGE_ROUTING = "color_exchange_routing";
 
     public void sendWork() throws IOException, TimeoutException {
         Connection connection = RabbitConnection.getRabbitConnection();
         Channel channel = connection.createChannel();
         channel.queueDeclare("work_que",false,false,false,null);
         // 设置该值后mq不会给消费者将所有平均的消息给消费者，而是处理完一条 再取一条
-        // channel.basicQos(1)
+//         channel.basicQos(1)
 
         for (int i = 0; i < 10000; i++) {
             String message = "work_mes:"+i;
-            channel.basicPublish("","work_que",null,("work_mes:"+i).getBytes());
+            channel.basicPublish(""," ",null,("work_mes:"+i).getBytes());
             log.info("send suc message:{}",message );
         }
 
