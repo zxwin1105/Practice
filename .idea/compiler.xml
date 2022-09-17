@@ -10,6 +10,7 @@
         <module name="JDK-Feature" />
         <module name="xxlJob-Demo" />
         <module name="Producer-Demo" />
+        <module name="Guava-Demo" />
         <module name="Spring-boot-Redis" />
         <module name="PgDB-Demo" />
         <module name="Pay-Demo" />
@@ -19,8 +20,8 @@
         <module name="Mybatis-plus-Demo" />
         <module name="Redis-Demo" />
         <module name="UnitTest" />
-        <module name="Security-Demo" />
         <module name="Zookeeper-Demo" />
+        <module name="Security-Demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -34,6 +35,7 @@
       <module name="AuthServer" options="-parameters" />
       <module name="Consumer-Demo" options="-parameters" />
       <module name="Curator-zk" options="-parameters" />
+      <module name="Guava-Demo" options="-parameters" />
       <module name="JDK-Feature" options="-parameters" />
       <module name="Mybatis-plus-Demo" options="-parameters" />
       <module name="Oauth2-Demo" options="-parameters" />
