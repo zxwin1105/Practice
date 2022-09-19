@@ -1,0 +1,12 @@
+server:
+  port: 15671
+spring:
+  rabbitmq:
+    port: 5672
+    username: rabbit
+    password: rabbit
+    virtual-host: /
+    host: 192.168.56.11
+    listener:
+      direct:
+        acknowledge-mode: manual

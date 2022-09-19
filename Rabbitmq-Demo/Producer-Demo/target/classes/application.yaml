@@ -1,0 +1,11 @@
+server:
+  port: 15670
+spring:
+  rabbitmq:
+    host: 192.168.56.11
+    port: 5672
+    username: rabbit
+    password: rabbit
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
