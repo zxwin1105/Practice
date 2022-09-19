@@ -9,8 +9,11 @@
     <file url="file://$PROJECT_DIR$/Mybatis-plus-Demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Mybatis-plus-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Oauth2-Demo/AuthServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Oauth2-Demo/AuthServer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Pay-Demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Pay-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/PgDB-Demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PgDB-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Rabbitmq-Demo/Consumer-Demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Rabbitmq-Demo/Consumer-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Rabbitmq-Demo/Producer-Demo/src/main/java" charset="UTF-8" />
@@ -18,11 +21,13 @@
     <file url="file://$PROJECT_DIR$/Rabbitmq-Demo/Rabbit-Demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Rabbitmq-Demo/Rabbit-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Redis-Demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Redis-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Security-Demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Security-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Spring-boot-Redis/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Spring-boot-Redis/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/UnitTest/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/UnitTest/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zookeeper-Demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zookeeper-Demo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xxlJob-Demo/src/main/java" charset="UTF-8" />
