@@ -12,8 +12,9 @@
     <artifactId>Rabbitmq-Demo</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>Producer-Demo</module>
+        <module>Rabbit-Demo</module>
         <module>Consumer-Demo</module>
+        <module>Producer-Demo</module>
     </modules>
 
     <properties>
@@ -22,10 +23,10 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>amqp-client</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.rabbitmq</groupId>-->
+<!--            <artifactId>amqp-client</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
@@ -40,6 +41,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
     </dependencies>
 

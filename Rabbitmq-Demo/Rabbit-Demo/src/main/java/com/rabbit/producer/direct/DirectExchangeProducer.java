@@ -25,8 +25,11 @@ public class DirectExchangeProducer {
     public void sendDirect() throws IOException, TimeoutException {
         Connection connection = RabbitConnection.getRabbitConnection();
         Channel channel = connection.createChannel();
+        // 定义routingKeys
         String[] colors = {"yellow","pink","blue"};
+        // 批量发送消息
         for (int i = 0; i < 100; i++) {
+            // 随机获取routingKey
             int index = random.nextInt(3);
             String message = "color is " + colors[index] + ":"+i;
             channel.basicPublish(COLOR_EXCHANGE_ROUTING,colors[index],null,message.getBytes());

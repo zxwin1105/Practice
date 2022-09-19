@@ -10,6 +10,7 @@ import java.util.Map;
  * @date 2022/9/16
  */
 public class WeatherRouting {
+    /** exchange名称 */
     public static final String WEATHER_EXCHANGE_ROUTING = "weather_exchange_routing";
 
     public static final Map<String,String> WEATHER_MAP = new HashMap<>();
