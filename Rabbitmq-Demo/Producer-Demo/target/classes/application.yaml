@@ -7,5 +7,8 @@ spring:
     username: rabbit
     password: rabbit
     virtual-host: /
-    publisher-confirm-type: correlated
     publisher-returns: true
+    publisher-confirm-type: correlated
+    template:
+      # 确认publisher-returns 策略
+      mandatory: true

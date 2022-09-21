@@ -8,5 +8,11 @@ spring:
     virtual-host: /
     host: 192.168.56.11
     listener:
-      direct:
-        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: auto
+        retry:
+          enabled: true
+          initial-interval: 1000
+          multiplier: 2
+          max-attempts: 3
+          stateless: true

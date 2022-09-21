@@ -20,7 +20,19 @@ public class RabbitMqSenderServerTest {
 
     @Test
     public void testSend() throws InterruptedException {
-        rabbitMqSenderServer.sendBootQueue();
-        TimeUnit.SECONDS.sleep(10);
+        for (int i = 0; i < 10; i++) {
+            rabbitMqSenderServer.sendBootQueue(i);
+            TimeUnit.MILLISECONDS.sleep(500);
+        }
+    }
+
+    @Test
+    public void test_send_retry() {
+        rabbitMqSenderServer.sendRetry();
+    }
+
+    @Test
+    public void test_confirm() {
+        rabbitMqSenderServer.sendAndConfirm();
     }
 }

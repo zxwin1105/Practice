@@ -22,7 +22,6 @@
         <module>Redis-Demo</module>
         <module>Zookeeper-Demo</module>
         <module>Rabbitmq-Demo</module>
-        <module>Guava-Demo</module>
     </modules>
 
     <parent>

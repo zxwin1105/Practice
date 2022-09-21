@@ -1,5 +1,6 @@
 package com.rabbit.producer.config;
 
+import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Return;
 import com.rabbitmq.client.ReturnCallback;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * RabbitMq配置类，并配置消息确认
+ *
  * @author zhaixinwei
  * @date 2022/9/19
  */
@@ -24,60 +26,74 @@ public class RabbitMqConfig implements RabbitTemplate.ConfirmCallback, RabbitTem
     public static final String BOOT_EXCHANGE_NAME = "boot_exchange";
 
     public static final String BOOT_QUEUE = "boot_queue";
+    public static final String RETRY_QUEUE = "retry_queue";
 
     private final RabbitTemplate rabbitTemplate;
 
-    public RabbitMqConfig(RabbitTemplate rabbitTemplate){
+    public RabbitMqConfig(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
+
     /**
      * 声明交换机
+     *
      * @return exchange
      */
     @Bean("bootExchange")
-    public Exchange bootExchange(){
+    public Exchange bootExchange() {
         // durable:是否持久化
         return ExchangeBuilder.topicExchange(BOOT_EXCHANGE_NAME).durable(true).build();
     }
 
     /**
      * 声明队列
+     *
      * @return queue
      */
     @Bean("bootQueue")
-    public Queue bootQueue(){
+    public Queue bootQueue() {
         return QueueBuilder.durable(BOOT_QUEUE).build();
     }
 
+    @Bean("retryQueue")
+    public Queue retryQueue(){
+
+        return QueueBuilder.durable(RETRY_QUEUE).build();
+    }
     /**
      * 绑定交换机和队列
+     *
      * @param exchange 交换机
-     * @param queue 队列
+     * @param queue    队列
      * @return binding
      */
     @Bean("bindBoot")
-    public Binding bindBoot(@Qualifier("bootExchange") Exchange exchange,@Qualifier("bootQueue") Queue queue){
+    public Binding bindBoot(@Qualifier("bootExchange") Exchange exchange, @Qualifier("bootQueue") Queue queue) {
         return BindingBuilder.bind(queue).to(exchange).with("boot.#").noargs();
     }
 
+    @Bean("bindRetry")
+    public Binding bindRetry(@Qualifier("bootExchange")Exchange exchange,@Qualifier("retryQueue") Queue queue){
+        return BindingBuilder.bind(queue).to(exchange).with("retry.#").noargs();
+    }
+
     @PostConstruct
-    private void init(){
+    private void init() {
         rabbitTemplate.setConfirmCallback(this);
-        rabbitTemplate.setReturnsCallback(this);
+//        rabbitTemplate.setReturnsCallback(this);
     }
 
     @Override
     public void confirm(CorrelationData correlationData, boolean b, String s) {
-        if(b){
-            log.info("消息成功投递到exchange");
-        }else {
-            log.error("消息投递exchange失败");
+        if (b) {
+            log.info("global消息成功投递到exchange:{}", s);
+        } else {
+            log.error("global消息投递exchange失败:{}", s);
         }
     }
 
     @Override
     public void returnedMessage(ReturnedMessage returnedMessage) {
         log.error("消息投递queue失败，返回消息{}", new String(returnedMessage.getMessage().getBody()));
-
     }
 }
