@@ -5,6 +5,7 @@ import com.mp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,4 +42,15 @@ public class UserController {
     public List<User> queryAllUser(){
         return userService.list();
     }
+
+    @GetMapping("/date")
+    public User date(){
+        User user = new User();
+        user.setAge(32);
+        user.setCreateTime(new Date());
+
+        return user;
+    }
+
+
 }

@@ -35,4 +35,19 @@ public class RabbitMqSenderServerTest {
     public void test_confirm() {
         rabbitMqSenderServer.sendAndConfirm();
     }
+
+    @Test
+    public void test_dead(){
+        rabbitMqSenderServer.sendDeadLetter();
+    }
+
+    @Test
+    public void test_order(){
+        rabbitMqSenderServer.sendOrder();
+    }
+
+    @Test
+    public void test_delay(){
+        rabbitMqSenderServer.sendDelay();
+    }
 }

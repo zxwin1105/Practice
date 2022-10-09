@@ -22,6 +22,7 @@
         <module>Redis-Demo</module>
         <module>Zookeeper-Demo</module>
         <module>Rabbitmq-Demo</module>
+        <module>RocketMq-Demo</module>
     </modules>
 
     <parent>

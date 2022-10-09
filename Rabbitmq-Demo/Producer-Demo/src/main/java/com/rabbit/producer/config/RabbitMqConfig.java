@@ -27,6 +27,8 @@ public class RabbitMqConfig implements RabbitTemplate.ConfirmCallback, RabbitTem
 
     public static final String BOOT_QUEUE = "boot_queue";
     public static final String RETRY_QUEUE = "retry_queue";
+    public static final String ORDER_EXCHANGE= "order_exchange";
+    public static final String ORDER_QUEUE = "order_queue";
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -52,14 +54,40 @@ public class RabbitMqConfig implements RabbitTemplate.ConfirmCallback, RabbitTem
      */
     @Bean("bootQueue")
     public Queue bootQueue() {
-        return QueueBuilder.durable(BOOT_QUEUE).build();
+        return QueueBuilder.durable(BOOT_QUEUE)
+                .deadLetterExchange("dead_exchange")
+                .deadLetterRoutingKey("dead.boot")
+                .build();
     }
 
     @Bean("retryQueue")
     public Queue retryQueue(){
-
-        return QueueBuilder.durable(RETRY_QUEUE).build();
+        return QueueBuilder.durable(RETRY_QUEUE)
+                .build();
     }
+
+    @Bean("orderExchange")
+    public Exchange orderExchange(){
+        return ExchangeBuilder.topicExchange(ORDER_EXCHANGE).durable(true).build();
+    }
+
+    @Bean("orderQueue")
+    public Queue orderQueue(){
+
+        return QueueBuilder.durable(ORDER_QUEUE)
+                // 设置队列为ttl 单位ms
+                .ttl(5000)
+                .deadLetterExchange("ttl_exchange")
+                .deadLetterRoutingKey("ttl.order")
+                .build();
+    }
+
+
+    @Bean("orderBinding")
+    public Binding orderBinding(@Qualifier("orderExchange") Exchange exchange,@Qualifier("orderQueue") Queue queue){
+        return BindingBuilder.bind(queue).to(exchange).with("order.#").noargs();
+    }
+
     /**
      * 绑定交换机和队列
      *
@@ -76,6 +104,8 @@ public class RabbitMqConfig implements RabbitTemplate.ConfirmCallback, RabbitTem
     public Binding bindRetry(@Qualifier("bootExchange")Exchange exchange,@Qualifier("retryQueue") Queue queue){
         return BindingBuilder.bind(queue).to(exchange).with("retry.#").noargs();
     }
+
+
 
     @PostConstruct
     private void init() {

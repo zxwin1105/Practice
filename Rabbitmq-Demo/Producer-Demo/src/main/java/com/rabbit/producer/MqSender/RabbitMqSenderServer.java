@@ -57,4 +57,27 @@ public class RabbitMqSenderServer {
                 .build();
         rabbitTemplate.convertAndSend(RabbitMqConfig.BOOT_EXCHANGE_NAME, "boot.confirm", message, correlationData);
     }
+
+    public void sendDeadLetter(){
+        Message message = MessageBuilder.withBody("dead letter".getBytes())
+                .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+                .build();
+
+        rabbitTemplate.convertAndSend(RabbitMqConfig.BOOT_EXCHANGE_NAME,"boot.dead",message);
+    }
+
+
+    public void sendOrder(){
+        Message message = MessageBuilder.withBody("order-1".getBytes())
+                .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+                .build();
+        rabbitTemplate.convertAndSend(RabbitMqConfig.ORDER_EXCHANGE,"order.o1",message);
+    }
+
+    public void sendDelay(){
+        Message message = MessageBuilder.withBody("delay-message".getBytes())
+                .setHeader("x-delay",10000L) // 消息头设置延时
+                .build();
+        rabbitTemplate.convertAndSend("delayExchange","delay.plugins",message);
+    }
 }
