@@ -65,7 +65,6 @@ public class NormalMessage {
         DefaultMQProducer producer = new DefaultMQProducer("normal_message_group");
         producer.setNamesrvAddr("192.168.56.11:9876");
         producer.start();
-
         for (int i = 0; i < 10; i++) {
             final int messageIndex = i;
             Message message = new Message("normal_message","asyncMessage",("asyncMessage"+i).getBytes(StandardCharsets.UTF_8));

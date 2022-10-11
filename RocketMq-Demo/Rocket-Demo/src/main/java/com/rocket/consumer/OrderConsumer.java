@@ -19,6 +19,8 @@ import java.util.List;
 @Slf4j
 public class OrderConsumer {
     private static final String CONSUMER_ORDER_GROUP = "CONSUMER_ORDER_GROUP";
+    private static final String CONSUMER_PAYMENT_GROUP = "CONSUMER_PAYMENT_GROUP";
+    private static final String CONSUMER_SHIPPING_GROUP = "CONSUMER_SHIPPING_GROUP";
 
     /**
      * 消费订单消息
@@ -31,7 +33,7 @@ public class OrderConsumer {
         consumer.registerMessageListener(new MessageListenerOrderly() {
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
-                log.info("消费订单消息：{}",list);
+                log.info("消费订单支付消息：{}",new String(list.get(0).getBody()));
                 return ConsumeOrderlyStatus.SUCCESS;
             }
         });
@@ -42,14 +44,14 @@ public class OrderConsumer {
      * 消费订单支付消息
      */
     public void consumerPayment() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_ORDER_GROUP);
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_PAYMENT_GROUP);
         consumer.setNamesrvAddr("192.168.56.11:9876");
         consumer.setMessageModel(MessageModel.CLUSTERING);
         consumer.subscribe(OrderMessage.ORDER_TOPIC,OrderMessage.TAGS[1]);
         consumer.registerMessageListener(new MessageListenerOrderly() {
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
-                log.info("消费订单支付消息：{}",list);
+                log.info("消费订单支付消息：{}",new String(list.get(0).getBody()));
                 return ConsumeOrderlyStatus.SUCCESS;
             }
         });
@@ -60,14 +62,14 @@ public class OrderConsumer {
      * 消费发货消息
      */
     public void consumerShipping() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_ORDER_GROUP);
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_SHIPPING_GROUP);
         consumer.setNamesrvAddr("192.168.56.11:9876");
         consumer.setMessageModel(MessageModel.CLUSTERING);
         consumer.subscribe(OrderMessage.ORDER_TOPIC,OrderMessage.TAGS[2]);
         consumer.registerMessageListener(new MessageListenerOrderly() {
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
-                log.info("消费发货消息：{}",list);
+                log.info("消费订单支付消息：{}",new String(list.get(0).getBody()));
                 return ConsumeOrderlyStatus.SUCCESS;
             }
         });
