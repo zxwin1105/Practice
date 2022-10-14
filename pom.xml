@@ -23,6 +23,7 @@
         <module>Zookeeper-Demo</module>
         <module>Rabbitmq-Demo</module>
         <module>RocketMq-Demo</module>
+        <module>Kafka-Demo</module>
     </modules>
 
     <parent>

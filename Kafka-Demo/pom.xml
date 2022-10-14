@@ -9,11 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>RocketMq-Demo</artifactId>
+    <artifactId>Kafka-Demo</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>Rocket-Demo</module>
-        <module>RocketMq-Producer</module>
+        <module>Kafka-Test</module>
     </modules>
 
     <properties>
@@ -23,15 +22,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-            <version>4.9.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>3.3.1</version>
         </dependency>
 
         <dependency>
@@ -40,9 +33,13 @@
         </dependency>
 
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
     </dependencies>
-
 </project>

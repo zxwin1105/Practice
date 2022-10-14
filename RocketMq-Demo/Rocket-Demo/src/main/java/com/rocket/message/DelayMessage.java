@@ -31,7 +31,7 @@ public class DelayMessage {
         producer.setNamesrvAddr("192.168.56.11:9876");
         producer.start();
         // 构建消息
-        Message message = new Message(DELAY_TOPIC,"delay_message".getBytes(StandardCharsets.UTF_8));
+        Message message = new Message(DELAY_TOPIC,"delay_message".getBytes(RemotingHelper.DEFAULT_CHARSET));
         message.setDelayTimeLevel(3);
         SendResult send = producer.send(message);
         log.info("发送延时消息：{}",send);
