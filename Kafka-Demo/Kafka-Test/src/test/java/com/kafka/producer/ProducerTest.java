@@ -1,4 +1,4 @@
-package com.kafka.producer.com.kafka;
+package com.kafka.producer;
 
 import com.kafka.producer.Producer;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ProducerTest {
 
     @Test
-    public void sendRecordTest(){
+    public void sendRecordTest() throws InterruptedException {
         new Producer().sendRecord();
     }
 }
