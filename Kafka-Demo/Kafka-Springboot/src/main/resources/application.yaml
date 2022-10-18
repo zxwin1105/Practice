@@ -1,0 +1,15 @@
+spring:
+  kafka:
+    # kafka 服务地址
+    bootstrap-servers: 192.168.56.11
+    # 配置中可以配置producer consumer的默认信息，如果在业务代码中重新指定配置会覆盖默认
+    # 生产者默认配置
+    producer:
+      acks: 1 # 消息确认机制
+      retries: 3 # 失败重试次数
+    # 消费者默认配置
+    consumer:
+      group-id: DEFAULT_GROUP
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+
