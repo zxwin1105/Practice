@@ -1,7 +1,6 @@
 package com.netty.nio.net.block;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.nio.ch.Net;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -26,7 +25,7 @@ public class BlockServer {
 
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.bind(new InetSocketAddress("localhost", 8808));
-
+        // 存储连接到服务端的客户端
         List<SocketChannel> channels = new ArrayList<>();
         while (true) {
             // 服务监听，获取连接客户端的channel
