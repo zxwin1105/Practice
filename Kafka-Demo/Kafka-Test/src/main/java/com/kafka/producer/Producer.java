@@ -37,7 +37,7 @@ public class Producer {
         略会保证
          只要有一个备份存活就不会丢失数据。这是最强的数据保证。一般除非是金融级别，或跟钱打交道的场景才会使用这种配置。
         */
-        properties.put(ProducerConfig.ACKS_CONFIG, "all");
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
         /*
         发送失败会重试，默认重试间隔100ms，重试能保证消息发送的可靠性，但是也可能造成消息重复发送，比如网络抖动，所以需要在
         接收者那边做好消息接收的幂等性处理
@@ -51,7 +51,7 @@ public class Producer {
         一般设置10毫秒左右，就是说这个消息发送完后会进入本地的一个batch，如果10毫秒内，这个batch满了16kb就会随batch一起被发送出去
         如果10毫秒内，batch没满，那么也必须把消息发送出去，不能让消息的发送延迟时间太长
          */
-        properties.put(ProducerConfig.LINGER_MS_CONFIG, 10);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 1000);
         // 设置发送消息的本地缓冲区，如果设置了该缓冲区，消息会先发送到本地缓冲区，可以提高消息发送性能，默认值是33554432，即32MB
         properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
@@ -60,8 +60,9 @@ public class Producer {
         org.apache.kafka.clients.producer.Producer<String, String> producer = new KafkaProducer<>(properties);
 
 
-        CountDownLatch countDownLatch = new CountDownLatch(100);
-        for (int i = 0; i < 100; i++) {
+        CountDownLatch countDownLatch = new CountDownLatch(900000000);
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 900000000; i++) {
             // 构造消息记录
             /*
              1.指定消息发送到的分区
@@ -86,7 +87,9 @@ public class Producer {
                 countDownLatch.countDown();
             });
         }
+        long end = System.currentTimeMillis();
         countDownLatch.await();
+        log.info("time:{}",end - start);
         producer.close();
     }
 }

@@ -25,6 +25,7 @@
         <module>RocketMq-Demo</module>
         <module>Kafka-Demo</module>
         <module>Netty-Demo</module>
+        <module>Poi-Demo</module>
     </modules>
 
     <parent>

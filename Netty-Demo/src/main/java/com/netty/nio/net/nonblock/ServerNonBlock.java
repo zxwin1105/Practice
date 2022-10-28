@@ -102,7 +102,7 @@ public class ServerNonBlock {
     /**
      * 使用Selector的方式实现非阻塞，在有请求连接的时候才工作，没有请求连接是，线程阻塞
      *
-     * @throws IOException
+     * @throws IOException io
      */
     public void selector() throws IOException {
         // 1、创建selector 用于管理多个channel

@@ -12,6 +12,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 使用多线程对之前的非阻塞模式进一步优化。
@@ -30,9 +31,12 @@ public class MultiThreadServer {
         Selector selector = Selector.open();
         ssc.bind(new InetSocketAddress(8678));
         ssc.configureBlocking(false);
-        ssc.register(selector, 0, null);
-        Work work = new Work("work-01");
-        work.register();
+        ssc.register(selector, SelectionKey.OP_ACCEPT, null);
+        Work[] works = new Work[2];
+        for (int i = 0; i < works.length; i++) {
+            works[i] = new Work("work-" + i);
+        }
+        AtomicInteger index = new AtomicInteger(0);
         log.debug("server boot");
         while (true) {
             selector.select();
@@ -44,8 +48,9 @@ public class MultiThreadServer {
                     ServerSocketChannel channel = (ServerSocketChannel) key.channel();
                     SocketChannel socketChannel = channel.accept();
                     socketChannel.configureBlocking(false);
-                    log.debug("绑定读事件{}",channel);
-                    socketChannel.register(work.selector, SelectionKey.OP_READ, null);
+                    log.debug("绑定读事件{}", channel);
+                    // 实现对work简单的轮询负载均衡
+                    works[index.getAndIncrement() % works.length].register(socketChannel);
                 }
             }
 
@@ -57,20 +62,22 @@ public class MultiThreadServer {
 
         private Selector selector;
         private Thread thread;
-        private boolean start = false;
+        private volatile boolean start = false;
         private String name;
 
         Work(String name) {
             this.name = name;
         }
 
-        public void register() throws IOException {
+        public void register(SocketChannel channel) throws IOException {
             if (!start) {
                 this.thread = new Thread(this, this.name);
                 this.selector = Selector.open();
                 this.start = !this.start;
                 this.thread.start();
             }
+            selector.wakeup();
+            channel.register(selector, SelectionKey.OP_READ, null);
         }
 
         @Override
@@ -79,7 +86,7 @@ public class MultiThreadServer {
             log.debug("读写事件running...");
             while (true) {
                 try {
-                    selector.select(1);
+                    selector.select();
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
