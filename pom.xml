@@ -26,6 +26,8 @@
         <module>Kafka-Demo</module>
         <module>Netty-Demo</module>
         <module>Poi-Demo</module>
+        <module>Mybatis-theory</module>
+        <module>Guava-Demo</module>
     </modules>
 
     <parent>

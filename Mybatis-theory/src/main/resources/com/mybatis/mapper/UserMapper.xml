@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.UserMapper">
+
+    <cache eviction="FIFO" flushInterval="6000" readOnly="false" size="1024"></cache>
+
+    <insert id="insertUserInfo">
+        insert into userinfo (userId, userName, userAge, userGender)
+            value (#{userId},#{userName},#{userAge},#{userGender})
+    </insert>
+
+    <select id="getOneById" parameterType="string" resultType="com.mybatis.entity.UserInfo" statementType="CALLABLE">
+        select *
+        from userinfo
+        where userId = #{id}
+    </select>
+</mapper>
