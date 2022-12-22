@@ -26,6 +26,7 @@
         <module>Kafka-Demo</module>
         <module>Netty-Demo</module>
         <module>Poi-Demo</module>
+        <module>ReplaceID</module>
     </modules>
 
     <parent>
