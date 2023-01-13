@@ -30,5 +30,14 @@ public class newCollectionTest {
         collection.multiMap();
     }
 
+    @Test
+    public void biMap(){
+        collection.biMap();
+    }
+
+    @Test
+    public void table(){
+        collection.table();
+    }
 
 }

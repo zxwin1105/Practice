@@ -1,6 +1,7 @@
 package com.guava.collection;
 
 import com.google.common.collect.*;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,8 +14,39 @@ import java.util.Map;
  */
 public class newCollection {
 
+
     /**
-     * MultiMap使用
+     * Map<T,Map<N,M>>
+     */
+    public void table(){
+        Table<String,String,Integer> table = HashBasedTable.create();
+        table.put("t1","n1",1);
+        table.put("t2","n2",2);
+        table.put("t3","n3",3);
+        table.put("t4","n4",4);
+        System.out.println(table.rowMap());
+        System.out.println(table.row("t1"));
+        System.out.println(table.rowKeySet());
+
+
+    }
+
+    public void biMap(){
+        HashBiMap<String, Integer> biMap = HashBiMap.create();
+        biMap.put("map1", 1);
+        biMap.put("map2", 2);
+        biMap.put("map3", 3);
+        biMap.put("map4", 4);
+        biMap.put("map5", 5);
+
+
+        System.out.println(biMap);
+        System.out.println(biMap.inverse());
+
+    }
+    
+    /**
+     * MultiMap使用 === Map<T,Set<Y>>,  Map<T,List<Y>>
      * 常用的ListMultiMap, SetMultiMap
      */
     public void multiMap() {
