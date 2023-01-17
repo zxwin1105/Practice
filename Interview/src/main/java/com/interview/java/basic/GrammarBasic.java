@@ -32,7 +32,7 @@ public class GrammarBasic {
      * 2. 为什么需要泛型？
      * - 适用于多种数据类型执行相同的代码
      * - 在使用时指定类型，不需要做强制类型转换（提高类型安全）
-     *
+     * <p>
      * 定义泛型方法
      */
     public <T> T getObject(Class<T> tClass) throws IllegalAccessException, InstantiationException {

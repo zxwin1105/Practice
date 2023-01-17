@@ -204,3 +204,37 @@ private class LazyIterator implements Iterator<S>{
 }
 
 ```
+
+## 四、SPI不足
+
+1. 不能按需加载，必须要遍历所有的实现，并实例化。需要在遍历中找到我们需要的实现，不需要的实现类，会消耗类实例化资源。
+
+2. 获取某个实现类的方式不够灵活，只能通过iterator形式获取，不能根据参数来获取实现类。
+
+3. ServiceLoader不支持线程安全。
+
+## 五、SPI应用场景
+
+SPI在Java开发中应用广泛，在java.util.spi，例如：
+
+1. TimeZoneNameProvider: 为 TimeZone 类提供本地化的时区名称。
+
+2. DateFormatProvider: 为指定的语言环境提供日期和时间格式。
+
+3. NumberFormatProvider: 为 NumberFormat 类提供货币、整数和百分比值。
+
+4. Driver: 从 4.0 版开始，JDBC API 支持 SPI 模式。旧版本使用 Class.forName() 方法加载驱动程序。
+
+5. PersistenceProvider: 提供 JPA API 的实现。
+
+
+## 引(zhao)用（chao）
+
+> 作者：vivo互联网技术
+链接：https://juejin.cn/post/7163177020615032863
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+> 
+
+
+
