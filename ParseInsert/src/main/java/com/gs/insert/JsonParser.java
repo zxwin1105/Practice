@@ -45,17 +45,17 @@ public class JsonParser {
                     val.setStr(true);
 
 //                    // 处理转义字符
-//                    String v = val.toString();
-//                    if (v.contains("'")) {
-//                        StringBuilder sb = new StringBuilder();
-//                        for(char ch : v.toCharArray()){
-//                            if(ch == '\''){
-//                                sb.append("\\");
-//                            }
-//                            sb.append(ch);
-//                        }
-//                        val.setVal(sb.toString());
-//                    }
+                    String v = val.toString();
+                    if (v.contains("'")) {
+                        StringBuilder sb = new StringBuilder();
+                        for(char ch : v.toCharArray()){
+                            if(ch == '\''){
+                                sb.append("'");
+                            }
+                            sb.append(ch);
+                        }
+                        val.setVal(sb.toString());
+                    }
                 }
                 if (filter.contains(key.toLowerCase()) && value == null) {
                     value = "";

@@ -33,6 +33,7 @@
         <module>GetRequest</module>
         <module>ParseInsert</module>
         <module>Interview</module>
+        <module>ExcelInsertSql</module>
     </modules>
 
     <parent>

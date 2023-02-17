@@ -1,4 +1,4 @@
-package com.gs.insert;
+package com.insert;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,15 +39,16 @@ public class DataSourceOpt {
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            System.out.println("Error:  "+sql);
+            System.err.println("Error:  "+sql);
             try {
                 assert connection != null;
-                connection.commit();
+                connection.rollback();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        }
-    }
+            throw new RuntimeException("end");
 
-    
+        }
+
+    }
 }

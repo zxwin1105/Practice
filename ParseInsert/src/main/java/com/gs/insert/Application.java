@@ -25,11 +25,11 @@ public class Application {
     // 2. 解析json文件key 为字段名，value为属性名
     // 3. 插入数据库
     public static void main(String[] args) {
-        String readDir = "C:\\Users\\T470\\Desktop\\塔里木\\数据对接\\data\\sd_well";
+        String readDir = "C:\\Users\\T470\\Desktop\\塔里木\\数据对接\\data\\cd_well";
         // 数据库表名
         String tableName = "public.cd_well";
 
-        List<String> filter = Collections.singletonList("well_type");
+        List<String> filter = Arrays.asList();
 
         File dir = new File(readDir);
         File[] files = dir.listFiles((dirFile, name) -> name.endsWith(".json"));
