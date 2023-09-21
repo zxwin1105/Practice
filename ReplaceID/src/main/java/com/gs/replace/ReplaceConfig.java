@@ -1,10 +1,13 @@
 package com.gs.replace;
 
-import com.alibaba.excel.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Multimap;
 
-import java.io.*;
-import java.util.Map;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 
 /**
  * @author zxwin
@@ -14,9 +17,9 @@ public class ReplaceConfig implements Replace{
     private final static String MACHINE_ERPID_KEY = "machineERPID";
 
     @Override
-    public void replace(Map<String, String> replaceMap, String path) {
+    public void replace(Multimap<String, String> replaceMap, String readPath, String outPath) {
         // 获取当前path路径下的所有文件名称
-        File filePath = new File(path);
+        File filePath = new File(readPath);
 
         File[] files = filePath.listFiles((dir, name) -> name.endsWith(".json"));
         if (files == null) {
@@ -26,32 +29,28 @@ public class ReplaceConfig implements Replace{
         for (File file : files) {
             // 获取文件名称（oldId）
             String oldId = getOldId(file);
-            String newId = replaceMap.get(oldId);
-            if (!StringUtils.isBlank(newId)) {
-                // 修改文件名称
-                String newFileName = file.toString().replace(oldId, newId);
-                if(file.renameTo(new File(newFileName))){
-                    // 修改json内容
-                    replaceJson(oldId, newId, newFileName);
-                }else{
-                    System.out.println("修改文件名失败，old:" + file.getPath() + "new:" + newFileName);
-                }
+            Collection<String> values = replaceMap.get(oldId);
+            for (String value : values) {
+                JSONObject jsonObject = replaceJson(oldId, value, file.getPath());
+                write(jsonObject, new File(outPath+"/"+value+".json"));
+                System.out.println(value+"替换"+oldId);
             }
         }
     }
 
-    private void replaceJson(String oldId, String newId, String newFileName) {
+    private JSONObject replaceJson(String oldId, String newId, String newFileName) {
         try {
             InputStream inputStream = new FileInputStream(newFileName);
 
             JSONObject jsonObject = JSONObject.parseObject(inputStream,JSONObject.class);
             if(oldId.equals(jsonObject.get(MACHINE_ERPID_KEY).toString())){
                 jsonObject.replace(MACHINE_ERPID_KEY, newId);
-                write(jsonObject,new File(newFileName));
             }
+            return jsonObject;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     private String getOldId(File fileName) {

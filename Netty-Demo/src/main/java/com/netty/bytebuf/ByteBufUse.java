@@ -5,9 +5,6 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.CompositeByteBuf;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
-
 
 /**
  * @author zhaixinwei
@@ -17,6 +14,15 @@ import java.util.Arrays;
 public class ByteBufUse {
 
     public static void main(String[] args) {
+//        testIndex();
+
+        composite();
+    }
+
+    /**
+     * 测试ByteBuf指针
+     */
+    private static void testIndex() {
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer(16);
         byteBuf.writeBoolean(true);
         log.debug(byteBuf.toString());
@@ -28,15 +34,14 @@ public class ByteBufUse {
         log.debug("capacity:{} read:{};write{}", byteBuf.capacity(), byteBuf.readerIndex(), byteBuf.writerIndex());
         log.debug("read byte:{}", byteBuf.readInt());
         log.debug("capacity:{} read:{};write{}", byteBuf.capacity(), byteBuf.readerIndex(), byteBuf.writerIndex());
-
-
-        composite();
     }
 
     /**
      * 演示多个ByteBuf组合成一个ByteBuf
+     * composite可以将两个ByteBuf组合为一个ByteBuf，且不会发生内存复制
      */
     private static void composite() {
+        // 待组合的两个ByteBuf
         ByteBuf buf1 = ByteBufAllocator.DEFAULT.buffer(5);
         buf1.writeBytes(new byte[]{'a', 'b', 'c', 'd', 'e'});
         ByteBuf buf2 = ByteBufAllocator.DEFAULT.buffer(5);
@@ -44,19 +49,34 @@ public class ByteBufUse {
         log("buf1:", buf1);
         log("buf2:", buf2);
 
-
-        // 原始方法合并，需要进行两次copy
+        // 原始方法合并，需要进行两次copy,
+        log.debug("capacity:{} read:{};write{}", buf1.capacity(), buf1.readerIndex(), buf1.writerIndex());
         ByteBuf rawComposite = ByteBufAllocator.DEFAULT.buffer(10);
+        // buf1和buf2的读指针会被移动到写指针位置
         rawComposite.writeBytes(buf1).writeBytes(buf2);
         log("rawComposite:", rawComposite);
+        log.debug("capacity:{} read:{};write{}", buf1.capacity(), buf1.readerIndex(), buf1.writerIndex());
 
         // 零拷贝方式，逻辑上合并两个buf
+
+        // 重置读指针
         buf1.resetReaderIndex();
         buf2.resetReaderIndex();
         CompositeByteBuf logicComposite = ByteBufAllocator.DEFAULT.compositeBuffer();
         logicComposite.addComponents(true, buf1, buf2);
         log("logicComposite:", logicComposite);
         log.info("capacity:{}", logicComposite);
+        // 毒蜘蛛不对移动
+        log.debug("capacity:{} read:{};write{}", buf1.capacity(), buf1.readerIndex(), buf1.writerIndex());
+        // 操作loginComposite不会影响buf1
+        logicComposite.readByte();
+        logicComposite.writeBytes(new byte[]{'n','b','a'});
+        log("buf1:", buf1);
+        log("buf2:", buf2);
+        log("logicComposite:", logicComposite);
+        log.debug("capacity:{} read:{};write{}", logicComposite.capacity(), logicComposite.readerIndex(), logicComposite.writerIndex());
+        log.debug("capacity:{} read:{};write{}", buf1.capacity(), buf1.readerIndex(), buf1.writerIndex());
+        // 注意release()方法
     }
 
     /**

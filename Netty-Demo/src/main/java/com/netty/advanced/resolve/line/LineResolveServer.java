@@ -1,15 +1,13 @@
 package com.netty.advanced.resolve.line;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +33,7 @@ public class LineResolveServer {
                         pipeline.addLast(new LineBasedFrameDecoder(1024));
 //                        pipeline.addLast(new DelimiterBasedFrameDecoder(1024, ));
                         // 添加调试日志解析器
-                        pipeline.addLast(new LoggingHandler());
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                     }
                 }).bind(8753);
     }

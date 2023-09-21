@@ -7,6 +7,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.FixedLengthFrameDecoder;
+import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +31,7 @@ public class FixLenResolveServer {
                         // 添加定长消息解析器，设置固定长度10
                         pipeline.addLast(new FixedLengthFrameDecoder(10));
                         // 添加调试日志解析器
-                        pipeline.addLast(new LoggingHandler());
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                     }
                 }).bind(8754);
     }

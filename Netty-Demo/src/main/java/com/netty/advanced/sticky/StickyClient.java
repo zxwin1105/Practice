@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.net.InetSocketAddress;
 
 /**
+ * netty粘包/半包问题演示客户端
+ *
  * @author zhaixinwei
  * @date 2022/11/1
  */
@@ -31,7 +33,7 @@ public class StickyClient {
                                 // 为测试黏包问题，连续发10次数据到服务端，观察服务端接收数据的次数，大小
                                 for (int i = 0; i < 10; i++) {
                                     ByteBuf buffer = ctx.alloc().buffer(16);
-                                    buffer.writeBytes(new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
+                                    buffer.writeBytes(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
                                     ctx.writeAndFlush(buffer);
                                 }
                             }

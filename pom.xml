@@ -27,6 +27,8 @@
         <module>Netty-Demo</module>
         <module>Poi-Demo</module>
         <module>ReplaceID</module>
+        <module>GenerateJson</module>
+        <module>Browsermob-proxy</module>
         <module>Mybatis-theory</module>
         <module>Guava-Demo</module>
         <module>TuoMin</module>
@@ -34,6 +36,7 @@
         <module>GetRequest</module>
         <module>ParseInsert</module>
         <module>Interview</module>
+        <module>Design-Pattern</module>
     </modules>
 
     <parent>

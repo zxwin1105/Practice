@@ -1,13 +1,13 @@
 package com.gs.parser;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author zxwin
@@ -15,15 +15,15 @@ import java.util.Map;
  */
 public class ExcelParser {
 
-    private final Map<String,String> replaceMap = new HashMap<>();
+    private final Multimap<String, String> replaceMap = MultimapBuilder.hashKeys().treeSetValues().build();
 
-    public void parser(String path){
+    public void parser(String path) {
         try {
             XSSFWorkbook book = new XSSFWorkbook(new FileInputStream(path));
             XSSFSheet sheet = book.getSheetAt(0);
 
             for (Row row : sheet) {
-                if(row.getRowNum()==0){
+                if (row.getRowNum() == 0) {
                     continue;
                 }
                 // 第一列为new，第二列为old
@@ -36,7 +36,7 @@ public class ExcelParser {
         }
     }
 
-    public Map<String,String> getMap(){
+    public Multimap<String, String> getMap() {
         return replaceMap;
     }
 }

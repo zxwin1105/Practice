@@ -3,9 +3,12 @@ package com.gs.replace;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.google.common.collect.Multimap;
 
-import java.io.*;
-import java.util.Map;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * @author zxwin
@@ -13,15 +16,18 @@ import java.util.Map;
  */
 public interface Replace {
 
-    void replace(Map<String, String> replaceMap, String path);
+    void replace(Multimap<String, String> replaceMap, String readPath, String outPath);
 
 
     /**
      * 将jsonObject写出到文件
      */
-    default void write(JSONObject jsonObject, File file){
+    default void write(JSONObject jsonObject, File file) {
         try {
-            String res = JSON.toJSONString(jsonObject, SerializerFeature.PrettyFormat);
+            if(!file.getParentFile().exists()){
+                file.getParentFile().mkdirs();
+            }
+            String res = JSON.toJSONString(jsonObject, SerializerFeature.PrettyFormat, SerializerFeature.DisableCircularReferenceDetect);
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write(res);
             writer.flush();
