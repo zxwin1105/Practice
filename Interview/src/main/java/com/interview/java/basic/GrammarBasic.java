@@ -1,5 +1,7 @@
 package com.interview.java.basic;
 
+import java.util.ArrayList;
+
 /**
  * Java面试常见的语法基础
  *
@@ -9,11 +11,13 @@ package com.interview.java.basic;
 public class GrammarBasic {
 
     public static void main(String[] args) throws Exception {
-        GrammarBasic grammarBasic = new GrammarBasic();
-        grammarBasic.addOpt();
-
-//        GrammarBasic object = grammarBasic.getObject(GrammarBasic.class);
-        grammarBasic.reflect();
+        new ArrayList()
+//        GrammarBasic grammarBasic = new GrammarBasic();
+//        grammarBasic.addOpt();
+//       
+//
+////        GrammarBasic object = grammarBasic.getObject(GrammarBasic.class);
+//        grammarBasic.reflect();
     }
 
     /**
